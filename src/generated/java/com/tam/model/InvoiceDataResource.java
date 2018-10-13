@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
  * InvoiceDataResource
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:19:21.629+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:31:05.089+02:00")
 
 public class InvoiceDataResource   {
   @JsonProperty("invoices")
