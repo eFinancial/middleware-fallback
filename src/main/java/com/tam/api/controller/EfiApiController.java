@@ -28,6 +28,7 @@ public class EfiApiController implements EfiApi {
     @Override
     @CrossOrigin
     public ResponseEntity<Void> saveInvoice(@ApiParam(value = "Invoice"  )  @Valid @RequestBody InvoiceDataResource body) {
+        InvoiceDataResource invoiceDataResource = body;
         efiRepository.save(body);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -18,7 +18,7 @@ import javax.validation.constraints.*;
  * InvoiceResource
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:59:50.256+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T22:42:07.745+02:00")
 
 public class InvoiceResource   {
   @JsonProperty("billNo")
@@ -28,13 +28,13 @@ public class InvoiceResource   {
   private String date = null;
 
   @JsonProperty("totalCostBrutto")
-  private Integer totalCostBrutto = null;
+  private BigDecimal totalCostBrutto = null;
 
   @JsonProperty("totalCostNetto")
-  private Integer totalCostNetto = null;
+  private BigDecimal totalCostNetto = null;
 
   @JsonProperty("customerPaid")
-  private Integer customerPaid = null;
+  private BigDecimal customerPaid = null;
 
   @JsonProperty("tax")
   private BigDecimal tax = null;
@@ -86,7 +86,7 @@ public class InvoiceResource   {
     this.date = date;
   }
 
-  public InvoiceResource totalCostBrutto(Integer totalCostBrutto) {
+  public InvoiceResource totalCostBrutto(BigDecimal totalCostBrutto) {
     this.totalCostBrutto = totalCostBrutto;
     return this;
   }
@@ -97,16 +97,17 @@ public class InvoiceResource   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Integer getTotalCostBrutto() {
+  public BigDecimal getTotalCostBrutto() {
     return totalCostBrutto;
   }
 
-  public void setTotalCostBrutto(Integer totalCostBrutto) {
+  public void setTotalCostBrutto(BigDecimal totalCostBrutto) {
     this.totalCostBrutto = totalCostBrutto;
   }
 
-  public InvoiceResource totalCostNetto(Integer totalCostNetto) {
+  public InvoiceResource totalCostNetto(BigDecimal totalCostNetto) {
     this.totalCostNetto = totalCostNetto;
     return this;
   }
@@ -117,16 +118,17 @@ public class InvoiceResource   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Integer getTotalCostNetto() {
+  public BigDecimal getTotalCostNetto() {
     return totalCostNetto;
   }
 
-  public void setTotalCostNetto(Integer totalCostNetto) {
+  public void setTotalCostNetto(BigDecimal totalCostNetto) {
     this.totalCostNetto = totalCostNetto;
   }
 
-  public InvoiceResource customerPaid(Integer customerPaid) {
+  public InvoiceResource customerPaid(BigDecimal customerPaid) {
     this.customerPaid = customerPaid;
     return this;
   }
@@ -137,12 +139,13 @@ public class InvoiceResource   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public Integer getCustomerPaid() {
+  public BigDecimal getCustomerPaid() {
     return customerPaid;
   }
 
-  public void setCustomerPaid(Integer customerPaid) {
+  public void setCustomerPaid(BigDecimal customerPaid) {
     this.customerPaid = customerPaid;
   }
 
