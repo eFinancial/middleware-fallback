@@ -1,19 +1,19 @@
 swagger: '2.0'
 info:
-  description: Server to manage and analyze Threat Models
+  description: Server to manage invoices using efi
   version: 1.0.0
-  title: Threat Model Assessment App
+  title: Efi Fallback Middleware
 tags:
-  - name: threat-model
-    description: Create, save and get events
+  - name: efi
+    description: Save and get invoices
 paths:
-  /threat/save:
+  /efi/save:
       post:
         tags:
-          - threat
-        summary: Save threat models
-        description: Save threat models from the frontend
-        operationId: saveThreatModel
+          - efi
+        summary: Save invoices
+        description: Save invoices
+        operationId: saveInvoice
         consumes:
           - application/json
         produces:
@@ -21,306 +21,91 @@ paths:
         parameters:
           - in: body
             name: body
-            description: Threat Model
+            description: Invoice
             schema:
-              $ref: '#/definitions/ThreatModel'
+              $ref: '#/definitions/InvoiceData'
         responses:
           '201':
-            description: Created test
-          '401':
-            description: Unauthorized
+            description: Created Invoice
           '405':
-            description: Failed to create event
+            description: Failed to create invoice
+  /efi/load:
+    get:
+      tags:
+      - efi
+      summary: Get transactions
+      description: Returns all saved transactions
+      operationId: getInvoices
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Got successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InvoiceData'
+        '404':
+          description: There are no transactions
 definitions:
-  ThreatModel:
+  InvoiceData:
     type: object
     properties:
-      interactors:
+      invoices:
         type: array
         items:
-          $ref: '#/definitions/Interactor'
-      dataFlows:
-        type: array
-        items:
-          $ref: '#/definitions/DataFlow'
-      dataStores:
-        type: array
-        items:
-          $ref: '#/definitions/DataStore'
-      processes:
-        type: array
-        items:
-          $ref: '#/definitions/Process'
-      collections:
-        type: array
-        items:
-          $ref: '#/definitions/Collection'
-  Interactor:
-    type: object
-    properties:
-      id:
+          $ref: '#/definitions/Invoice'
+      hash:
         type: string
-      coordinates:
-        $ref: '#/definitions/PointCoordinates'
+  Invoice:
+    type: object
+    properties:
+      billNo:
+        type: integer
+      date:
+        type: string
+      totalCostBrutto:
+        type: integer
+      totalCostNetto:
+        type: integer
+      customerPaid:
+        type: integer
+      tax:
+        type: number
+      seller:
+        $ref: '#/definitions/Seller'
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+  Seller:
+    type: object
+    properties:
+      name:
+        type: number
+      ustIdNr:
+        type: string
+      storeIdNr:
+        type: string
+      checkoutLane:
+        type: number
+      address:
+        $ref: '#/definitions/Address'
+  Product:
+    type: object
+    properties:
       name:
         type: string
-      type:
-        $ref: '#/definitions/InteractorType'
-      genericOptions:
-        $ref: '#/definitions/GenericInteractorOptions'
-  PointCoordinates:
-    type: object
-    properties:
-      xCoord:
+      count:
         type: number
-      yCoord:
+      itemPrice:
         type: number
-  InteractorType:
-    type: string
-    enum:
-      - Generic Interactor
-      - Human User
-      - Browser
-      - External Web Application
-      - External Web Service
-      - Authorization Provider
-      - Megaservice
-      - Windows Runtime
-  GenericInteractorOptions:
+  Address:
     type: object
     properties:
-      authenticatesItself:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      destinationAuthenticated:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      human:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-  GenericOptionsTrueFalseEnum:
-    type: string
-    enum:
-      - true
-      - false
-      - notSelected
-  DataFlow:
-    type: object
-    properties:
-      id:
+      street:
         type: string
-      name:
+      zip:
         type: string
-      position:
+      city:
         type: string
-        enum:
-          - center
-          - bottom
-          - top
-      startCoords:
-        $ref: '#/definitions/PointCoordinates'
-      endCoords:
-        $ref: '#/definitions/PointCoordinates'
-      startElement:
-        type: object
-        properties:
-          id:
-            type: string
-          coordinates:
-            $ref: '#/definitions/PointCoordinates'
-      endElement:
-        type: object
-        properties:
-          id:
-            type: string
-          coordinates:
-            $ref: '#/definitions/PointCoordinates'
-      type:
-        $ref: '#/definitions/DataFlowType'
-      genericOptions:
-        $ref: '#/definitions/GenericDataFlowOptions'
-  GenericDataFlowOptions:
-    type: object
-    properties:
-      physicalNetwork:
-        type: string
-        enum:
-          - wire
-          - wifi
-          - 2G-4G
-          - bluetooth
-          - notSelected
-      sourceAuthenticated:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      destinationAuthenticated:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      providesConfidentiality:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      providesIntegrity:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      transmitsXML:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      containsCookies:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      soapPayload:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      restPayload:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      rssPayload:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      jsonPayload:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-  DataFlowType:
-    type: string
-    enum:
-      - Generic Data Flow
-      - ALCP
-      - Binary Data Flow
-      - HTTP Data Flow
-      - HTTPS Data Flow
-      - IOCTL Interface
-      - IPsec Data Flow
-      - Named Pipe Data Flow
-      - RPC / DCOM
-      - SMB Data Flow
-      - User Data Protocol
-  DataStore:
-    type: object
-    properties:
-      id:
-        type: string
-      coordinates:
-        $ref: '#/definitions/PointCoordinates'
-      name:
-        type: string
-      type:
-        $ref: '#/definitions/DataStoreType'
-      genericOptions:
-        $ref: '#/definitions/GenericDataStoreOptions'
-  GenericDataStoreOptions:
-    type: object
-    properties:
-      storesCredentials:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      storesLogData:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      encrypted:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      signed:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      backup:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      writeAccess:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      removableStorage:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      shared:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-  DataStoreType:
-    type: string
-    enum:
-      - Generic Data Store
-      - Cache
-      - Cloud Storage
-      - Configuration File
-      - Cookies
-      - Device
-      - File System
-      - HTML5 Local Storage
-      - Non-Relational Database
-      - Registry Hive
-      - SQL Database
-  Process:
-    type: object
-    properties:
-      id:
-        type: string
-      coordinates:
-        $ref: '#/definitions/PointCoordinates'
-      name:
-        type: string
-      type:
-        $ref: '#/definitions/ProcessType'
-      genericOptions:
-        $ref: '#/definitions/GenericProcessOptions'
-  GenericProcessOptions:
-    type: object
-    properties:
-      codeType:
-        type: string
-        enum:
-          - managed
-          - unmanaged
-          - notSelected
-      runningAs:
-        type: string
-        enum:
-          - kernel
-          - system
-          - networkService
-          - localService
-          - admin
-          - standardUserWithElevation
-          - standardUserWithoutElevation
-          - windowsStoreApp
-          - notSelected
-      isolationLevel:
-        type: string
-        enum:
-          - appContainer
-          - lowIntegrityLvl
-          - moice
-          - sandbox
-          - notSelected
-      acceptsInputsFrom:
-        type: string
-        enum:
-          - anyRemoteInteractor
-          - kernelSysOrLocalAdmin
-          - localNetworkOrService
-          - localStandardUserWithElevation
-          - localStandardUserWithoutElevation
-          - windowsStoreApps
-          - nothing
-          - other
-          - notSelected
-      implAuthenticationMechanism:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      implAuthorizationMechanism:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      implCommunityProtocol:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      sanitizesInput:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-      sanitizesOutput:
-        $ref: '#/definitions/GenericOptionsTrueFalseEnum'
-  ProcessType:
-    type: string
-    enum:
-      - Generic Process
-      - App running non-MS OS
-      - Browser Plug-ins
-      - Browser Client
-      - Kernel Thread
-      - Managed Application
-      - OS Process
-      - Thick Client
-      - Thread
-      - Virtual Machine
-      - Web Application
-      - Web Server
-      - Web Service
-      - Win32 Service
-      - Windows Store Process
-  Collection:
-    type: object
-    properties:
-      id:
-        type: string
-      coordinates:
-        $ref: '#/definitions/PointCoordinates'
-      height:
-        type: number
-      width:
-        type: number
-      collectedElements:
-        type: array
-        items:
-          type: string

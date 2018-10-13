@@ -12,4 +12,4 @@ project:
   description: TAM Server to analzye and manage threat models
 spring:
   jackson.serialization.write_dates_as_timestamps: false
-  data.mongodb.uri: mongodb://Threat:44ehzXVYp1ud@ds046677.mlab.com:46677/threat-model-assessment-db
+  data.mongodb.uri: mongodb://Efi:DS03wwus?@ds131753.mlab.com:31753/efi-db

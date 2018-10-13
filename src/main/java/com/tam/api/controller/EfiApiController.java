@@ -1,8 +1,8 @@
 package com.tam.api.controller;
 
-import com.tam.api.ThreatApi;
-import com.tam.model.ThreatModelResource;
-import com.tam.repositories.ThreatModelRepository;
+import com.tam.api.EfiApi;
+import com.tam.model.InvoiceDataResource;
+import com.tam.repositories.EfiRepository;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @EnableAutoConfiguration
 @RestController
 @AllArgsConstructor
-public class ThreatApiController implements ThreatApi {
+public class EfiApiController implements EfiApi {
 
     @Autowired
-    private ThreatModelRepository threatModelRepository;
+    private EfiRepository efiRepository;
 
     @Override
     @CrossOrigin
-    public ResponseEntity<Void> saveThreatModel(@ApiParam(value = "Threat Model"  )  @Valid @RequestBody ThreatModelResource body) {
-        // TODO: Validate
-        this.threatModelRepository.save(body);
+    public ResponseEntity<Void> saveInvoice(@ApiParam(value = "Invoice"  )  @Valid @RequestBody InvoiceDataResource body) {
+        efiRepository.save(body);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @Override
+    @CrossOrigin
+    public ResponseEntity<List<InvoiceDataResource>> getInvoices() {
+        List<InvoiceDataResource> existingInvoices = efiRepository.findAll();
+        return new ResponseEntity<>(existingInvoices, HttpStatus.OK);
     }
 }

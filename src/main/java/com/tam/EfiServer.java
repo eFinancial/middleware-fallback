@@ -14,10 +14,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAutoConfiguration
 @EnableSwagger2
 @SpringBootApplication
-public class ThreatServer implements CommandLineRunner {
+public class EfiServer implements CommandLineRunner {
 
     public static void main(String[] args) throws Exception {
-        new SpringApplication(ThreatServer.class).run(args);
+        new SpringApplication(EfiServer.class).run(args);
     }
 
     @Override
