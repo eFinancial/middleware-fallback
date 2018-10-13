@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.tam.model.InvoiceResource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -16,43 +14,34 @@ import javax.validation.constraints.*;
  * InvoiceDataResource
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:31:05.089+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:59:50.256+02:00")
 
 public class InvoiceDataResource   {
-  @JsonProperty("invoices")
-  @Valid
-  private List<InvoiceResource> invoices = null;
+  @JsonProperty("invoice")
+  private InvoiceResource invoice = null;
 
   @JsonProperty("hash")
   private String hash = null;
 
-  public InvoiceDataResource invoices(List<InvoiceResource> invoices) {
-    this.invoices = invoices;
-    return this;
-  }
-
-  public InvoiceDataResource addInvoicesItem(InvoiceResource invoicesItem) {
-    if (this.invoices == null) {
-      this.invoices = new ArrayList<>();
-    }
-    this.invoices.add(invoicesItem);
+  public InvoiceDataResource invoice(InvoiceResource invoice) {
+    this.invoice = invoice;
     return this;
   }
 
   /**
-   * Get invoices
-   * @return invoices
+   * Get invoice
+   * @return invoice
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public List<InvoiceResource> getInvoices() {
-    return invoices;
+  public InvoiceResource getInvoice() {
+    return invoice;
   }
 
-  public void setInvoices(List<InvoiceResource> invoices) {
-    this.invoices = invoices;
+  public void setInvoice(InvoiceResource invoice) {
+    this.invoice = invoice;
   }
 
   public InvoiceDataResource hash(String hash) {
@@ -85,13 +74,13 @@ public class InvoiceDataResource   {
       return false;
     }
     InvoiceDataResource invoiceData = (InvoiceDataResource) o;
-    return Objects.equals(this.invoices, invoiceData.invoices) &&
+    return Objects.equals(this.invoice, invoiceData.invoice) &&
         Objects.equals(this.hash, invoiceData.hash);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invoices, hash);
+    return Objects.hash(invoice, hash);
   }
 
   @Override
@@ -99,7 +88,7 @@ public class InvoiceDataResource   {
     StringBuilder sb = new StringBuilder();
     sb.append("class InvoiceDataResource {\n");
     
-    sb.append("    invoices: ").append(toIndentedString(invoices)).append("\n");
+    sb.append("    invoice: ").append(toIndentedString(invoice)).append("\n");
     sb.append("    hash: ").append(toIndentedString(hash)).append("\n");
     sb.append("}");
     return sb.toString();

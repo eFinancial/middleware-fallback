@@ -51,10 +51,8 @@ definitions:
   InvoiceData:
     type: object
     properties:
-      invoices:
-        type: array
-        items:
-          $ref: '#/definitions/Invoice'
+      invoice:
+        $ref: '#/definitions/Invoice'
       hash:
         type: string
   Invoice:
@@ -82,7 +80,7 @@ definitions:
     type: object
     properties:
       name:
-        type: number
+        type: string
       ustIdNr:
         type: string
       storeIdNr:

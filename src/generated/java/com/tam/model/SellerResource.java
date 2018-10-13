@@ -15,11 +15,11 @@ import javax.validation.constraints.*;
  * SellerResource
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:31:05.089+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-10-13T21:59:50.256+02:00")
 
 public class SellerResource   {
   @JsonProperty("name")
-  private BigDecimal name = null;
+  private String name = null;
 
   @JsonProperty("ustIdNr")
   private String ustIdNr = null;
@@ -33,7 +33,7 @@ public class SellerResource   {
   @JsonProperty("address")
   private AddressResource address = null;
 
-  public SellerResource name(BigDecimal name) {
+  public SellerResource name(String name) {
     this.name = name;
     return this;
   }
@@ -44,13 +44,12 @@ public class SellerResource   {
   **/
   @ApiModelProperty(value = "")
 
-  @Valid
 
-  public BigDecimal getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(BigDecimal name) {
+  public void setName(String name) {
     this.name = name;
   }
 
