@@ -1,0 +1,111 @@
+swagger: '2.0'
+info:
+  description: Server to manage invoices using efi
+  version: 1.0.0
+  title: Efi Fallback Middleware
+tags:
+  - name: efi
+    description: Save and get invoices
+paths:
+  /efi/save:
+      post:
+        tags:
+          - efi
+        summary: Save invoices
+        description: Save invoices
+        operationId: saveInvoice
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        parameters:
+          - in: body
+            name: body
+            description: Invoice
+            schema:
+              $ref: '#/definitions/InvoiceData'
+        responses:
+          '201':
+            description: Created Invoice
+          '405':
+            description: Failed to create invoice
+  /efi/load:
+    get:
+      tags:
+      - efi
+      summary: Get transactions
+      description: Returns all saved transactions
+      operationId: getInvoices
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Got successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InvoiceData'
+        '404':
+          description: There are no transactions
+definitions:
+  InvoiceData:
+    type: object
+    properties:
+      invoices:
+        type: array
+        items:
+          $ref: '#/definitions/Invoice'
+      hash:
+        type: string
+  Invoice:
+    type: object
+    properties:
+      billNo:
+        type: integer
+      date:
+        type: string
+      totalCostBrutto:
+        type: integer
+      totalCostNetto:
+        type: integer
+      customerPaid:
+        type: integer
+      tax:
+        type: number
+      seller:
+        $ref: '#/definitions/Seller'
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+  Seller:
+    type: object
+    properties:
+      name:
+        type: number
+      ustIdNr:
+        type: string
+      storeIdNr:
+        type: string
+      checkoutLane:
+        type: number
+      address:
+        $ref: '#/definitions/Address'
+  Product:
+    type: object
+    properties:
+      name:
+        type: string
+      count:
+        type: number
+      itemPrice:
+        type: number
+  Address:
+    type: object
+    properties:
+      street:
+        type: string
+      zip:
+        type: string
+      city:
+        type: string

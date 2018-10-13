@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="swagger-spring" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="_middleware_generated" target="1.8" />
+      <module name="_middleware_main" target="1.8" />
+      <module name="_middleware_test" target="1.8" />
+      <module name="beevy-server_generated" target="1.8" />
+      <module name="beevy-server_main" target="1.8" />
+      <module name="beevy-server_test" target="1.8" />
+      <module name="BeevyServer_generated" target="1.8" />
+      <module name="BeevyServer_main" target="1.8" />
+      <module name="BeevyServer_test" target="1.8" />
+      <module name="server_generated" target="1.8" />
+      <module name="server_main" target="1.8" />
+      <module name="server_test" target="1.8" />
+      <module name="swagger-spring" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

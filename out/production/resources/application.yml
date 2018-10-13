@@ -1,0 +1,15 @@
+springfox.documentation.swagger.v2.path: /api-docs
+server:
+  context-path: /tam
+  port: 8080
+management:
+  port: 8081
+  security:
+    enabled: false
+project:
+  artifact-id: tam
+  name: Threat Model Assessment Server
+  description: TAM Server to analzye and manage threat models
+spring:
+  jackson.serialization.write_dates_as_timestamps: false
+  data.mongodb.uri: mongodb://Efi:DS03wwus?@ds131753.mlab.com:31753/efi-db
