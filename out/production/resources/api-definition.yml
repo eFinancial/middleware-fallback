@@ -4,31 +4,31 @@ info:
   version: 1.0.0
   title: Efi Fallback Middleware
 tags:
-  - name: efi
-    description: Save and get invoices
+- name: efi
+  description: Save and get invoices
 paths:
   /efi/save:
-      post:
-        tags:
-          - efi
-        summary: Save invoices
-        description: Save invoices
-        operationId: saveInvoice
-        consumes:
-          - application/json
-        produces:
-          - application/json
-        parameters:
-          - in: body
-            name: body
-            description: Invoice
-            schema:
-              $ref: '#/definitions/InvoiceData'
-        responses:
-          '201':
-            description: Created Invoice
-          '405':
-            description: Failed to create invoice
+    post:
+      tags:
+      - efi
+      summary: Save invoices
+      description: Save invoices
+      operationId: saveInvoice
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Invoice
+        schema:
+          $ref: '#/definitions/InvoiceData'
+      responses:
+        '201':
+          description: Created Invoice
+        '405':
+          description: Failed to create invoice
   /efi/load:
     get:
       tags:
@@ -63,11 +63,11 @@ definitions:
       date:
         type: string
       totalCostBrutto:
-        type: integer
+        type: number
       totalCostNetto:
-        type: integer
+        type: number
       customerPaid:
-        type: integer
+        type: number
       tax:
         type: number
       seller:

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @EnableAutoConfiguration
@@ -28,8 +27,10 @@ public class EfiApiController implements EfiApi {
     @Override
     @CrossOrigin
     public ResponseEntity<Void> saveInvoice(@ApiParam(value = "Invoice"  )  @Valid @RequestBody InvoiceDataResource body) {
-        InvoiceDataResource invoiceDataResource = body;
-        efiRepository.save(body);
+        InvoiceDataResource oldInvoice = efiRepository.findByHash(body.getHash());
+        if (oldInvoice != null) {
+            efiRepository.save(body);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
