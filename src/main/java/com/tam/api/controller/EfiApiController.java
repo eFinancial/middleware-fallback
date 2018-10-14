@@ -28,7 +28,7 @@ public class EfiApiController implements EfiApi {
     @CrossOrigin
     public ResponseEntity<Void> saveInvoice(@ApiParam(value = "Invoice"  )  @Valid @RequestBody InvoiceDataResource body) {
         InvoiceDataResource oldInvoice = efiRepository.findByHash(body.getHash());
-        if (oldInvoice != null) {
+        if (oldInvoice == null) {
             efiRepository.save(body);
         }
         return new ResponseEntity<>(HttpStatus.OK);
